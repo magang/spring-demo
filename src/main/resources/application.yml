@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: spring-demo
+  profiles:
+    active: dev
+  jackson:
+    timezone: GMT+8
+
+
+server:
+  port: 8085
+
+mybatis:
+  mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
