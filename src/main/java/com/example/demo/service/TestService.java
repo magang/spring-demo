@@ -1,10 +1,14 @@
 package com.example.demo.service;
 
+import com.alibaba.fastjson.TypeReference;
 import com.example.demo.constant.Constants;
 import com.example.demo.constant.TestDataConstants;
 import com.example.demo.dto.CoinSymbol;
 import com.example.demo.dto.IdName;
+import com.example.demo.entity.Person;
+import com.example.demo.mapper.PersonMapper;
 import com.example.demo.mapper.UserMapper;
+import com.example.demo.mapper.ext.PersonExtMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +34,12 @@ public class TestService {
     UserMapper userMapper;
     @Autowired
     HttpService httpService;
+    @Autowired
+    RedisService redisService;
+    @Autowired
+    PersonMapper personMapper;
+    @Autowired
+    PersonExtMapper personExtMapper;
 
     public String hello() {
         return TestDataConstants.HELLO;
@@ -68,5 +78,26 @@ public class TestService {
 
     public Date jacksonDate() {
         return new Date();
+    }
+
+    public String redisString() {
+        redisService.delete(TestDataConstants.REDIS_KEY);
+        redisService.set(TestDataConstants.REDIS_KEY, TestDataConstants.TEST, TestDataConstants.REDIS_EXPIRE_SECONDS);
+        return redisService.get(TestDataConstants.REDIS_KEY);
+    }
+
+    public Person redisObject() {
+        redisService.delete(TestDataConstants.REDIS_KEY);
+        Person person = personExtMapper.get(1);
+        redisService.set(TestDataConstants.REDIS_KEY, person, TestDataConstants.REDIS_EXPIRE_SECONDS);
+        return redisService.get(TestDataConstants.REDIS_KEY, Person.class);
+    }
+
+    public List<IdName> redisList() {
+        redisService.delete(TestDataConstants.REDIS_KEY);
+        List<IdName> users = userMapper.queryUserListDto();
+        redisService.set(TestDataConstants.REDIS_KEY, users, TestDataConstants.REDIS_EXPIRE_SECONDS);
+        return redisService.get(TestDataConstants.REDIS_KEY, new TypeReference<List<IdName>>() {
+        });
     }
 }

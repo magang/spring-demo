@@ -1,5 +1,7 @@
 package com.example.demo.resource;
 
+import com.example.demo.dto.IdName;
+import com.example.demo.entity.Person;
 import com.example.demo.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author dustforest
@@ -56,5 +59,20 @@ public class TestResource {
     @GetMapping("/jackson/date")
     public Date jacksonDate() {
         return testService.jacksonDate();
+    }
+
+    @GetMapping("/redis/string")
+    public String redisString() {
+        return testService.redisString();
+    }
+
+    @GetMapping("/redis/object")
+    public Person redisObject() {
+        return testService.redisObject();
+    }
+
+    @GetMapping("/redis/list")
+    public List<IdName> redisList() {
+        return testService.redisList();
     }
 }

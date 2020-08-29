@@ -1,8 +1,6 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entity.Person;
-import org.apache.ibatis.annotations.Select;
-
 import java.util.List;
 
 public interface PersonMapper {
@@ -21,7 +19,4 @@ public interface PersonMapper {
      * @mbg.generated
      */
     List<Person> selectAll();
-
-    @Select("select * from person where id=#{id}")
-    Person get(Integer id);
 }
