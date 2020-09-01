@@ -75,4 +75,9 @@ public class TestResource {
     public List<IdName> redisList() {
         return testService.redisList();
     }
+
+    @GetMapping("/redis/ping")
+    public String redisPing() {
+        return testService.redisPing();
+    }
 }

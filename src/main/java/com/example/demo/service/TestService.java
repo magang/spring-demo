@@ -100,4 +100,8 @@ public class TestService {
         return redisService.get(TestDataConstants.REDIS_KEY, new TypeReference<List<IdName>>() {
         });
     }
+
+    public String redisPing() {
+        return redisService.ping(TestDataConstants.HELLO);
+    }
 }
