@@ -6,9 +6,11 @@ import com.example.demo.constant.TestDataConstants;
 import com.example.demo.dto.CoinSymbol;
 import com.example.demo.dto.IdName;
 import com.example.demo.entity.Person;
+import com.example.demo.exception.CommonException;
 import com.example.demo.mapper.PersonMapper;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.mapper.ext.PersonExtMapper;
+import com.example.demo.util.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +105,25 @@ public class TestService {
 
     public String redisPing() {
         return redisService.ping(TestDataConstants.HELLO);
+    }
+
+    public String commonException() throws Exception {
+        throw new CommonException(TestDataConstants.ERROR_MSG);
+    }
+
+    public String runtimeException() throws Exception {
+        throw new RuntimeException(TestDataConstants.ERROR_MSG);
+    }
+
+    public String uuid() {
+        return CommonUtils.generateUuid();
+    }
+
+    public String dateFormat() {
+        return CommonUtils.formatDate(new Date());
+    }
+
+    public String dateTimeFormat() {
+        return CommonUtils.formatDateTime(new Date());
     }
 }

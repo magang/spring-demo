@@ -80,4 +80,29 @@ public class TestResource {
     public String redisPing() {
         return testService.redisPing();
     }
+
+    @GetMapping("/exception/common")
+    public String commonException() throws Exception {
+        return testService.commonException();
+    }
+
+    @GetMapping("/exception/runtime")
+    public String runtimeException() throws Exception {
+        return testService.runtimeException();
+    }
+
+    @GetMapping("/uuid")
+    public String uuid() {
+        return testService.uuid();
+    }
+
+    @GetMapping("/format/date")
+    public String dateFormat() {
+        return testService.dateFormat();
+    }
+
+    @GetMapping("/format/datetime")
+    public String datetimeFormat() {
+        return testService.dateTimeFormat();
+    }
 }

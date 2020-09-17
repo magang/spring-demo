@@ -1,5 +1,7 @@
 package com.example.demo.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +20,7 @@ import java.io.IOException;
  * @author dustforest
  */
 public class CustomAuthenticationFilter extends BasicAuthenticationFilter {
+    private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationFilter.class);
 
     public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);

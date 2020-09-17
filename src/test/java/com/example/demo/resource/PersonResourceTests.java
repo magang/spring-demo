@@ -1,5 +1,6 @@
 package com.example.demo.resource;
 
+import com.example.demo.constant.TestDataConstants;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +35,9 @@ public class PersonResourceTests {
     @Transactional
     @Rollback(value = true)
     public void testCreatingPerson() throws Exception {
-        String response = mvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON)
+        String response = mvc.perform(post("/person")
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", TestDataConstants.USER_NAME)
                 .accept(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"hello\"}"))
                 .andExpect(status().isOk())

@@ -1,5 +1,8 @@
 package com.example.demo.security;
 
+import com.example.demo.constant.TestDataConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,6 +18,7 @@ import org.springframework.util.StringUtils;
  */
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
+    private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
 
     @Autowired
     CustomUserDetailsService customUserDetailsService;
@@ -28,9 +32,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         String userName = token;
-        UserDetails userDetails = customUserDetailsService.loadUserByUsername(userName);
-
-        return new UsernamePasswordAuthenticationToken(userName, token, userDetails.getAuthorities());
+        if (TestDataConstants.USER_NAME.equals(userName)) {
+            UserDetails userDetails = customUserDetailsService.loadUserByUsername(userName);
+            return new UsernamePasswordAuthenticationToken(userName, token, userDetails.getAuthorities());
+        } else {
+            return new UsernamePasswordAuthenticationToken(userName, token);
+        }
     }
 
     @Override
