@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.constant.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class MailService {
      * @param subject 主题
      * @param content 内容
      */
-    public void sendSimpleMail(String to, String subject, String content) {
+    public String sendSimpleMail(String to, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
@@ -47,7 +48,10 @@ public class MailService {
         } catch (MailException e) {
             logger.error(this.getClass().getName() + "/" + Thread.currentThread().getStackTrace()[1].getMethodName() +
                     " errMsg: " + e.getMessage(), e);
+            return Constants.FAIL;
         }
+
+        return Constants.PASS;
     }
 
     /**
@@ -57,7 +61,7 @@ public class MailService {
      * @param subject 主题
      * @param content 内容
      */
-    public void sendHtmlMail(String to, String subject, String content) {
+    public String sendHtmlMail(String to, String subject, String content) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
             MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
@@ -69,7 +73,10 @@ public class MailService {
         } catch (MessagingException e) {
             logger.error(this.getClass().getName() + "/" + Thread.currentThread().getStackTrace()[1].getMethodName() +
                     " errMsg: " + e.getMessage(), e);
+            return Constants.FAIL;
         }
+
+        return Constants.PASS;
     }
 
     /**
@@ -80,7 +87,7 @@ public class MailService {
      * @param content  内容
      * @param filePath 附件
      */
-    public void sendAttachmentsMail(String to, String subject, String content, String filePath) {
+    public String sendAttachmentsMail(String to, String subject, String content, String filePath) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -97,7 +104,10 @@ public class MailService {
         } catch (MessagingException e) {
             logger.error(this.getClass().getName() + "/" + Thread.currentThread().getStackTrace()[1].getMethodName() +
                     " errMsg: " + e.getMessage(), e);
+            return Constants.FAIL;
         }
+
+        return Constants.PASS;
     }
 }
 
