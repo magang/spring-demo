@@ -18,7 +18,7 @@ import java.util.Date;
 public class MailUtils {
     @Autowired
     private JavaMailSender javaMailSender;
-
+    
     /**
      * 发送邮件
      */

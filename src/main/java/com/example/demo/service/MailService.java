@@ -6,8 +6,9 @@ import com.example.demo.vo.MailVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 /**
  * @author dustforest
@@ -19,7 +20,14 @@ public class MailService {
     @Autowired
     private MailUtils mailUtils;
 
-    public ResultEnum test(MailVo mailVo) {
+    @Autowired
+    private FreeMarkerConfigurer freeMarkerConfigurer;
+
+    @Value("${spring.mail.from}")
+    private String from;
+
+    public ResultEnum send(MailVo mailVo) {
+        mailVo.setFrom(from);
         mailUtils.sendMail(mailVo);
         return ResultEnum.ok;
     }

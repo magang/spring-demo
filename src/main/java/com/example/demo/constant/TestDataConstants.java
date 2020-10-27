@@ -7,4 +7,11 @@ public class TestDataConstants {
     public static final String REDIS_KEY = "REDIS::TEST";
     public static final int REDIS_EXPIRE_SECONDS = 10;
     public static final String ERROR_MSG = "error!";
+
+    public static final String[] MAIL_TO = new String[]{"magang@zybank.com.cn"};
+    public static final String[] MAIL_CC = new String[]{"magang@zybank.com.cn"};
+    public static final String[] MAIL_BCC = new String[]{"magang@zybank.com.cn"};
+    public static final String MAIL_SUBJECT = "四大结果指标报表（2020年09月）";
+    public static final String MAIL_TEXT = "test";
+    public static final String MAIL_TEMPLATE = "email.html";
 }

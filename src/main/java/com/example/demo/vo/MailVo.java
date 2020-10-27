@@ -42,7 +42,7 @@ public class MailVo {
      * 邮件附件
      */
     private MultipartFile[] files;
-    
+
     /**
      * 邮件附件在服务器存储的地址
      */
